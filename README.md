@@ -31,7 +31,10 @@ La base de dades consisteix en una carpeta on hi ha un munt de carpetes on cada 
 
 ### PRIMERA PART: AUTOENCODER
 
-Aquesta part consisteix en la creació de l'autoencoder que agafarà mostres de teixit de pacients sans per entrenar. La reconstrucció de teixit sa sigui bona i amb pocs errors i que quan el model recontriueixi una imatge en presencia del Helicobacter pylori, no la pogui recontruir bé. Amb aquest error de reconstrucció podem diferenciar les imatges amb el Helicobacter pylori i sense ell. La creació autoencoder segueix la següent de metodología, quedant la següent arquitectura del coder i decoder:
+Aquesta part consisteix en la creació de l'autoencoder que agafarà mostres de teixit de pacients sans per entrenar. La reconstrucció de teixit sa sigui bona i amb pocs errors i que quan el model recontriueixi una imatge en presencia del Helicobacter pylori, no la pogui recontruir bé. Amb aquest error de reconstrucció podem diferenciar les imatges amb el Helicobacter pylori i sense ell. On s’han anat probant diferents paràmetres en la xarxa modificant el seu número de neurones i learning rate, ajustant segons els resutltats de la loss. Calculant la loss amb el MSE i comparant la imatge generada del autoencoder amb la original. També s’ha anat el criterion i el número de époques per seguir perfilant l'obtenció d’una gràfica de loss adequada. Aquesta prova de parametres de la red s'ha anat combinant amb diferents criterion, epoques i learning rate. 
+
+
+La creació autoencoder segueix la següent de metodología, quedant la següent arquitectura del coder i decoder:
 
 ### Coder
 
@@ -59,9 +62,14 @@ Convulocional Transposada (64, 32, 3, stride=2, padding=1
 ReLu
 Convulocional Transposada (32, 3, 3, stride=2, padding=1)
 
+### Parametres
+- Adamax
+- lr = 0.001
+- epoques = 200
 
-On s’han anat probant diferents paràmetres en la xarxa modificant el seu número de neurones i learning rate, ajustant segons els resutltats de la loss.Calculant la loss amb el MSE i comparant la imatge generada del autoencoder amb la original. També s’ha anat el criterion i el número de époques per seguir perfilant l'obtenció d’una gràfica de loss adequada.
-
+Entre les imatges generades per l'autoencoder i les orignals calculem la seva diferencia i amb MSE i aixì obtenim la nostre loss. Mostrem la loss del nostre train i del test veiem si el nostre autoencoder generalitza bé per generar parts de teixit sa. Creant el model sense la capacitat de generar el Helicobacter pylori. Ha train tenim 12 carpetes pel train 
+acabar esto cuando acabe primera parte **********************************
+ 
 
 
 ### SEGONA PART: CLASSIFICACIÓ
