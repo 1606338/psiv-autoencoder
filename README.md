@@ -1,10 +1,16 @@
 # Repte 3: Histologia Digital
 
-## Introducció
+## INTRODUCCIÓ
 
 
-## Objectius
+## OBJECTIUS
 
 
-##
+## DISTRIBUCIÓ
+
+
+## BASE DE DADES
+
+
+## PROCEDIMENT
 
