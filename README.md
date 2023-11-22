@@ -37,12 +37,13 @@ Pel train hem agafat __ carpetes i pel test hem agafat __ carpetes.
 
 Aquesta part consisteix en la creació de l'autoencoder que agafarà mostres de teixit de pacients sans per entrenar. La reconstrucció de teixit sans ha de ser bona i amb pocs errors, per tal que quan el model recontriueixi una imatge amb presència de l'Helicobacter pylori, no la pugui recontruir bé. Amb aquest error de reconstrucció a la segona part podrem diferenciar les imatges amb el Helicobacter pylori i sense ell i classificar-les. Però ara tornant a la primera part, el que hem fet per obtenir una xarxa neuronal correcte i robusta ha estat el següent:
 Primer de tot disminuïr la mida de les imatges, és a dir, les hem convertit de 256x256x3 a 64x64x3.
-Tot seguit amb molt de proba i error, hem modificat i probat molts paràmetres de la xarxa, com ara canviar el número de nuerones per cada capa, posar mé so menys capes, el learning rate també l'hem anat canviant, i ajustant segons els resultats de les losses que ens donaven, tant train com test, i ajustant també segons la loss amb el MSE i comparant la imatge generada del autoencoder amb la original. També s’ha anat canvinat el criterion i el número de époques per seguir perfilant l'obtenció d’una gràfica de loss adequada. Aquesta prova de parametres de la red s'ha anat combinant amb diferents criterion, epoques i learning rate. 
+Tot seguit amb molt de prova i error, hem modificat i provat molts paràmetres de la xarxa, com ara canviar el número de neurones per cada capa, posar més o menys capes, el learning rate també l'hem anat canviant, i ajustant segons els resultats de les losses que ens donaven, tant train com test, i ajustant també segons la loss amb el MSE i comparant la imatge generada del autoencoder amb la original. També s’ha anat canvinat el criterion i el número de époques per seguir perfilant l'obtenció d’una gràfica de loss adequada. Aquesta prova de parametres de la xarxa s'ha anat combinant amb diferentes èpoques.
 
 
-La creació autoencoder segueix la següent de metodología, quedant la següent arquitectura del coder i decoder:
+La creació autoencoder segueix la següent de metodología, quedant la següent arquitectura del encoder i decoder:
 
-### Coder
+#### Enoder
+L'encoder és responsable de transformar la imatge original a una imatge de baixa dimensionalitat. El nostre encoder consisteix en capes de convolució seguides de funcions d'activació ReLU i capes de max pooling. Cada capa de convolució aprèn a extreure característiques específiques de l'entrada. Les capes de max pooling redueixen progressivament les dimensions espacials, ajudant a crear una representació comprimida de l'entrada. La darrera capa de l'encoder redueix l'entrada a una representació de baixa dimensionalitat, també coneguda com a espai latent.
 
 Convolucional - 2D(3, 32, 3, stride=1, padding=1)
 ReLu 
@@ -69,11 +70,15 @@ ReLu
 Convulocional Transposada (32, 3, 3, stride=2, padding=1)
 
 ### Parametres
-- Adamax
+- Optimizer: Adamax
+- Criterion: MSELoss
 - lr = 0.001
 - epoques = 200
 
-Entre les imatges generades per l'autoencoder i les orignals calculem la seva diferencia i amb MSE i aixì obtenim la nostre loss. Mostrem la loss del nostre train i del test veiem si el nostre autoencoder generalitza bé per generar parts de teixit sa. Creant el model sense la capacitat de generar el Helicobacter pylori. Ha train tenim 12 carpetes pel train 
+
+La generació de Losses 
+
+Entre les imatges generades per l'autoencoder i les orignals calculem la seva diferència i amb MSE i aixì obtenim la nostre loss. Mostrem la loss del nostre train i del test veiem si el nostre autoencoder generalitza bé per generar parts de teixit sa. Creant el model sense la capacitat de generar el Helicobacter pylori. Ha train tenim 12 carpetes pel train 
 acabar esto cuando acabe primera parte **********************************
  
 
