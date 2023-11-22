@@ -1,7 +1,7 @@
 # Repte 3: Histologia Digital
 
 ## INTRODUCCIÓ
-La funció principal d'un a classificador és assignar etiquetes o categories a noves imatges en funció de les característiques que ha après durant l'entrenament.El procés d'entrenament d'un classificador d'imatges generalment implica alimentar el sistema amb un conjunt de dades d'imatges prèviament etiquetades. El model d'IA utilitza aquestes imatges per aprendre patrons i característiques que són distintives de cada classe o categoria. Un cop entrenat, el classificador pot fer prediccions sobre noves imatges, assignant-los una etiqueta o categoria basada en el seu coneixement previ. La classificació d’imatges pot quedar esbiaxat si  les classes no tenen un número de imatges balancejat. Fent que la red neuronal sigui incapaç d’aprendre o de classificar amb la precisió esperada. 
+La funció principal d'un a classificador és assignar etiquetes o categories a noves imatges en funció de les característiques que ha après durant l'entrenament. El procés d'entrenament d'un classificador d'imatges generalment implica alimentar el sistema amb un conjunt de dades d'imatges prèviament etiquetades. El model d'IA utilitza aquestes imatges per aprendre patrons i característiques que són distintives de cada classe o categoria. Un cop entrenat, el classificador pot fer prediccions sobre noves imatges, assignant-los una etiqueta o categoria basada en el seu coneixement previ. La classificació d’imatges pot quedar esbiaxat si  les classes no tenen un número de imatges balancejat. Fent que la red neuronal sigui incapaç d’aprendre o de classificar amb la precisió esperada. 
 
 Per resoldre aquest problema clasificarem per contrast, és a dir que no aprendrem a classificar directament sino que d'una imatge farem una funció de contrast per imatge que en el nostre cas serà les diferencies entre la imatge original i la imatge generada per un autoencoder esbiaxat cap a una de les classes. Creant diferents embeddings pels tipus de classes  una classe la farà molt bé i l’altre no perque mai haurà rebut com entrenament una imatge d’aquella classe.  Mirant les diferències d’error i com han quedat les construccions de l’autoencoder podem classificar millor les classes obtingudes ja que una classe quedarà ven reconstruida i l'altre no. 
 
@@ -15,19 +15,23 @@ L’objectiu d'aquesta práctica és la detecció del  Helicobacter pylori, en c
 El GitHub l'hem distribuït de la següent manera:
   - directori modelos: anem guardant els diferents models del autoencoder que anem creant
   - autoencoder.py: arxiu on creem l'autoencoder i fem el seu entrenament.
-  - segona_part.py: arxiu on es classifica si les imatges si tenen o no el elicobacter pylori.
-  - imatges originals: carpeta que conté les imatges originals que tenen una construcció equivalent
-  - imatges reconstruides: carpeta que conté less imatges reconstruides pel nostre autoencoder
-  -  ... hay mas cosas mirar como quedara al final 
+  - segona_part.py: arxiu on es classifica si les imatges tenen o no el elicobacter pylori.
+  - imatges_originals_train: carpeta que conté les imatges originals que utilitzem com a train que no tenen presència del elicobacter
+  - imatges_reconstruides_train: carpeta que conté les imatges reconstruides del train pel nostre autoencoder
+  - imatges_originals_test: carpeta que conté les imatges originals que utilitzem com a test que no tenen presència dle elicobacter
+  - imatges_reconstruides_test: carpeta que conté les imatges reconstruides del train pel nostre autoencoder
+  - Gràfiques: carpeta que conté les gràfiques de les losses tant del train com del test
+
+
 
 
 ## BASE DE DADES
-
-La base de dades consisteix en una carpeta on hi ha un munt de carpetes on cada carpeta conté imatges d'un mateix pacient, dins de cada carpeta de pacient hi ha imatges de les seves mostres de teixit. Aquestes imatges venen etiquetades per la densitat de  Helicobacter pylori amb les següents etiquetes de baixa, alta i negativa.  En una carpeta apart hi han les mostres de teixit que contenen el Helicobacter pylori seperat en carpetes de pacient.  
+La base de dades que utilitzem a estat una que se'ns ha prporcionat en el Campus Virtual. La base de dades està distruibuida de la següent manera:
+Una crapeta que està fromada per moltes altres carpetes, on cadascuna fa referència a un pacient i conté les imatges de les mostres del teixit. Aquestes imatges venen etiquetades per la densitat de  Helicobacter pylori: baixa, alta i negativa.  
+En el nostre cas hem decidit separar en train i test, per tal de poder comprovar que el autoencoder que fem funciona correctament i és robust. 
+Pel train hem agafat __ carpetes i pel test hem agafat __ carpetes.
 
 ## PROCEDIMENT 
-
-
 
 ### PRIMERA PART: AUTOENCODER
 
