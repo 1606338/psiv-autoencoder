@@ -120,6 +120,8 @@ Al veure les imatges reconstruides podem veure que fa una reoconstrucció de les
 ## CONCLUSIONS
 Per veure que també classifica el nostre model ens bassat en la ROC-curve i segons el treshold que marca la gràfica observem el recall que obtindrem. Tenim un recall de ****** rellenar caundo ete el final *********.
 
+L'autoencoder es veu bastant esbiaat cap a les imatges sanes per tant podem les imatges reconstruides eren bastant semblants a les esperades, al no poder-se observar el bacteri en les imatges on el pacient està infectat.
+
 Tot i que l'apart de reconstruir imatges del autoencoder va força bé hi en alguns casos on el vermell no lo suficient significatiu i per tant no genera suficient loss perquè es pogui classificar com a infectat i no supera el threshold mercat la gràfica ROC-curve. 
 
 
