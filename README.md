@@ -31,7 +31,7 @@ El GitHub l'hem distribuït de la següent manera:
 La base de dades que utilitzem han estat una que se'ns ha proporcionat en el Campus Virtual. La base de dades està distribuïda de la següent manera:
 Una carpeta que està formada per moltes altres carpetes, on cadascuna fa referència a un pacient i conté les imatges de les mostres del teixit. Aquestes imatges venen etiquetades per la densitat d'Helicobacter pylori: baixa, alta i negativa.
 Per la primera part hem separat en train test tots els pacients que no tenen presència de l'Helicobacter pylori. En el nostre cas hem decidit separar en train i test, per tal de poder comprovar que l'autoencoder que fem funciona correctament i és robust.
-Pel train hem agafat 10,20,30,50 carpetes, és a dir, fem  4 models amb diferents valors de carpetes, però amb un test constant de 5 carpetes sempre.
+Pel train hem agafat 10,20,30,50 carpetes, és a dir, fem  4 models amb diferents valors de carpetes, però amb un test constant de 5 carpetes sempre. Hem anat probant al principi amb pocs pacients i hem anat augmentant al anar fent proves per tant tenim 4 models de base de dades.
 
 
 ## PROCEDIMENT 
@@ -102,6 +102,14 @@ Després d'entrenar l'autoencoder, hem de fer el classificador; per aquest proc�
 
 
 ## RESULTATS
+
+Tenim dos resultats un per saber que tan bé funciona el nostre autoencoder amb unes gráfiques de la loss i per saber que també classifiquem pacients dient quins són negatius i quins ón positius.  
+
+### Resultats Autoencoder
+
+
+
+### Resultat Classificació
 
 ## CONCLUSIONS
 
