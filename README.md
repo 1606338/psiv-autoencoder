@@ -31,7 +31,7 @@ El GitHub l'hem distribuït de la següent manera:
 La base de dades que utilitzem han estat una que se'ns ha proporcionat en el Campus Virtual. La base de dades està distribuïda de la següent manera:
 Una carpeta que està formada per moltes altres carpetes, on cadascuna fa referència a un pacient i conté les imatges de les mostres del teixit. Aquestes imatges venen etiquetades per la densitat d'Helicobacter pylori: baixa, alta i negativa.
 Per la primera part hem separat en train test tots els pacients que no tenen presència de l'Helicobacter pylori. En el nostre cas hem decidit separar en train i test, per tal de poder comprovar que l'autoencoder que fem funciona correctament i és robust.
-Pel train hem agafat __ carpetes i pel test hem agafat __ carpetes.
+Pel train hem agafat __ carpetes i pel test hem agafat __ carpetes. Hem fet 4 models de base de dades, que consten de diferents tamanys i on els de tamany més gran contenen totes les carpetes de pacients dels més petits. Que han estat dividit cada model en un train i test diferent.
 
 
 ## PROCEDIMENT 
