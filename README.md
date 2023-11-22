@@ -109,7 +109,7 @@ Tenim dos resultats un per saber que tan bé funciona el nostre autoencoder amb 
 
 
 ### Resultats Autoencoder
- Com ha resultats de la loss pels diferents trains hem obtingut han resultats molt semblants. Com es pot veure a les imatges de la carpeta gràfiques. La principal diferencia entre les gràfiques 
+ Com ha resultats de la loss pels diferents trains hem obtingut han resultats molt semblants. Com es pot veure a les imatges de la carpeta gràfiques. La principal diferencia entre les gràfiques que tenen diferent train és que la de 10 imatges és la que te pitjor resultats amb una loss de 0.00105 en el train i 0.00140 en el test, amb 200 époques. Per altre banda la de 20 imatges ha obtingut una loss de 0.00088 i 0.00105 en train i test respectivament molt semblant a la de 30 imatges que consta dels següents resultats 0.00076 i 0.00112 en train i test  respectivament. Veient la caiguda de la loss i els resultats final hem vist que la de 30 obté millor resultats ja que té la loss de test més baixa, degut a que és la que més imatges d'entrenament per tant pot generalitzar més, ja que tots utitlizen el mateix atuoencoder. 
  **acabar cuando acabe de ejecutar **
 
 Al veure les imatges reconstruides podem veure que fa una reoconstrucció de les imatges bastant properes a les orignals amb la diferencia de que les reconstruides són borrosses i les que estan infectades no tenen la capacitat de generar el color vermell. Per tant reconstrucció de les infectades no tenen el color vermell. Aquesta compració es poden veure en les carpetes d'imatges originals i en les carpetes d'imatges reconstruides. 
@@ -118,9 +118,10 @@ Al veure les imatges reconstruides podem veure que fa una reoconstrucció de les
 ### Resultat Classificació
 
 ## CONCLUSIONS
-Per veure que també classifica el nostre model ens bassat en la ROC-curve i segons el treshold que marca la gràfica observem el recall que obtindrem. Tenim un recall de ****** rellenar caundo ete el final *********.
 
-L'autoencoder es veu bastant esbiaxat cap a les imatges sanes per tant podem les imatges reconstruides eren bastant semblants a les esperades, al no poder-se observar el bacteri en les imatges on el pacient està infectat.
+L'autoencoder es veu bastant esbiaxat cap a les imatges sanes per tant podem les imatges reconstruides eren bastant semblants a les esperades, al no poder-se observar el bacteri en les imatges on el pacient està infectat. Degut a que amb les capes convulocionas ens permet etruere les característiques necesaries per reconstruir les imatges que rep, com si fossin sanes.
+
+Per veure que també classifica el nostre model ens bassat en la ROC-curve i segons el treshold que marca la gràfica observem el recall que obtindrem. Tenim un recall de ****** rellenar caundo ete el final *********.
 
 Tot i que l'apart de reconstruir imatges del autoencoder va força bé hi en alguns casos on el vermell no lo suficient significatiu i per tant no genera suficient loss perquè es pogui classificar com a infectat i no supera el threshold mercat la gràfica ROC-curve. 
 
