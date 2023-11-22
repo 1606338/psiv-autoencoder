@@ -97,8 +97,28 @@ Aquestes gràfiques ens serveixen per monitorar i veure que l'autoencoder és ro
  
 ### SEGONA PART: CLASSIFICACIÓ
 
-Després d'entrenar l'autoencoder, hem de fer el classificador; per aquest procés hem decidit fer boxplot de les loss, per les dues classes per veure la diferencia que hi ha havia entre ells, ja que la loss de les que tenen el Helicobacter pylori ha de ser més gran que que les que no el tenen. Al visualitzar els boxplots veiem que no hi ha molta diferencia entre ells ja que la part del bacteri és molt reduida i no marca la diferencia amb les altres parts de color blau. Per tant per veure la diferencia només tractarem amb el canal vermell ja que el teixit sa no té presencia d'aquest color i el autoencoder no ha rebut cap imatge amb vermell per tan no el pot generar. Al calcular la loss només amb el canal vermell podem observar que el resultat dels boxplots és significatiu, ja que les parts sanen no tenen error i les parts infectades si. 
-*** seguir cuando se acabe esta parte para eplicar que e hara i como e hara
+Després d'haver entrenat un autoencoder amb només pacients sans, utilitzarem aquest model per poder classificar pacients no sans, és a dir, positius; i sans, és a dir, negatius. Per fer-ho carregarem els models entrenats i els passarem les imatges contendides a la carpeta Annotated patches.
+
+Annotated patches conte 1330 imatges amb tres classes, negatiu, dubtós i positiu. La classe del mig no ens interessa per tant la ignorarem i ens quedarem amb 1255 imatges. Algo important és que ara ja no parlarem de pacients i carpetes sinó d'imatges, no separarem per pacients en cap moment.
+Aquest dataset es troba des-balançejat, tenint només 164 positius d'aquest 1255. Per tant haurem de utlitzar tècniques que siguin resistents a això. En aquest dataset trobem un arxiu csv que ens indica el target (si és positiu o negatiu) de cada una de les imatges.
+
+Llegirem totes les imatges i les passarem pel model, i això ens donarà una imatge reconstruïda. En les imatges sanes la reconstrucció hauria de ser semblant ja que el model ha vist imatges similars anteriorment. Però en veure les imatges positives el model no hauria de ser capaç de reconstruir les bacteries.
+Aquí radica la part important, hi haura més diferència en les imatges positives que en les negatives. Aquesta diferència ens hauria de permetre classificar-les.
+
+Per fer la diferència simplement restarem la entrada i la sortida. Clar que només ho farem per el canal blau. Això es deu a que es el que tindrà major diferència entre entrada i sortida, ja que en les positives el model s'haurà inventat punts blaus. Pensem que és millor fer-ho així que pel canal vermell. El motiu és que quan passa de tenir vermell a no tenir, en ser aquest 'vermell' molt fosc no hi haurà gaire diferència en números. En canvi, en el canal blau passem d'un punt que te un valor petit (ja que és fosc) a un valor molt gran.
+
+Una vegada tenim el llistat de diferències toca trobar quin és el treshold que separa les dues classes. Per fer-ho hem utilitzat la corba roc.
+Aquest mètode és resident al des-balançeig ,pràcticament està fet per evitar això, i per tant el nostre salvador en aquest cas. Dividirem la sortida en train i test. Tot i que no entrenarem res trobarem els valors de treshold en base a un i els provarem en base a l'altre.
+Podem veure les corbes roc en *****
+D'aqui podem trobar varios punts optims de tall, basats en la proximitat a la cantonada esquerra, el f-score o altres metriques que ens interesi.
+Hem escollit *****
+Ara per trobar els valors de com de bo es tot el nostre sistema simplement hem de pasar la part de test per aquest treshold i calcular les metriques.
+Ens dona ****
+
+Si està malament:
+
+Historogrames,
+explicació de què generalitza
 
 
 ## RESULTATS
