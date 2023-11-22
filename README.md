@@ -51,29 +51,18 @@ Hem decidit utilitzar les capes convolucionals 2d, ja que en el nostre cas ens v
 Per altra banda hem decidit utilitzar un nº de filtres bastant reduit per tal d'assolir el autoencoder esbiaxat.
 Tant al passing com a l'stride els hi hem possat un valor de 1, ja que volem que es mantegui la dimensionalitat (padding) i no saltar-nos cap píxel (stride).
 
-Convolucional - 2D(3, 32, 3, stride=1, padding=1)
-
-ReLu 
-
-MaxPool:  (2, stride=2, padding=1)
-
-Convolucional - 2D (32, 64, 3, stride=1, padding=1)
-
-ReLu
-
-MaxPool (2, stride=2, padding=1)
-
-Convolucional - 2D (64, 128, 3, stride=1, padding=1)
-
-ReLu
-
-MaxPool (2, stride=2, padding=1)
-
-Convolucional - 2D (128, 256, 3, stride=1, padding=1)
-
-ReLu
-
-MaxPool (2, stride=2, padding=1)
+- Convolucional - 2D(3, 32, 3, stride=1, padding=1)
+- ReLu 
+- MaxPool:  (2, stride=2, padding=1)
+- Convolucional - 2D (32, 64, 3, stride=1, padding=1)
+- ReLu
+- MaxPool (2, stride=2, padding=1)
+- Convolucional - 2D (64, 128, 3, stride=1, padding=1)
+- ReLu
+- MaxPool (2, stride=2, padding=1)
+- Convolucional - 2D (128, 256, 3, stride=1, padding=1)
+- ReLu
+- MaxPool (2, stride=2, padding=1)
 
 
 
