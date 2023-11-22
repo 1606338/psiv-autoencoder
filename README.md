@@ -103,10 +103,16 @@ Després d'entrenar l'autoencoder, hem de fer el classificador; per aquest proc�
 
 ## RESULTATS
 
-Tenim dos resultats un per saber que tan bé funciona el nostre autoencoder amb unes gráfiques de la loss i per saber que també classifiquem pacients dient quins són negatius i quins ón positius.  
+Tenim dos resultats un per saber que tan bé funciona el nostre autoencoder amb unes gráfiques de la loss i per saber que també classifiquem pacients dient quins són negatius i quins són positius.  
+
+
+
 
 ### Resultats Autoencoder
+ Com ha resultats de la loss pels diferents trains hem obtingut han resultats molt semblants. Com es pot veure a les imatges de la carpeta gràfiques. La principal diferencia entre les gràfiques 
+ **acabar cuando acabe de ejecutar **
 
+Al veure les imatges reconstruides podem veure que fa una reoconstrucció de les imatges bastant properes a les orignals amb la diferencia de que les reconstruides són borrosses i les que estan infectades no tenen la capacitat de generar el color vermell. Per tant reconstrucció de les infectades no tenen el color vermell. Aquesta compració es poden veure en les carpetes d'imatges originals i en les carpetes d'imatges reconstruides. 
 
 
 ### Resultat Classificació
