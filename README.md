@@ -71,13 +71,13 @@ Tant al passing com a l'stride els hi hem possat un valor de 1, ja que volem que
 El decoder s'encarrega de generar amb la sortida del encoder la imatge original d'entrada d'aquest, és a dir, pren la representació de baixa dimensionalitat generada pel encoder i la reconstrueix de nou a la forma original i que sigui el més semblant possible a la entrada original.
 Cada capa deconvolucional o convolució transposada aprèn a generar característiques que són inverses a les apreses per les capes corresponents del encoder. L'ús de funcions d'activació ReLU també ajuda en aquest procés.
 
-Convulocional Transposada (256, 128, 3, stride=2, padding=1) 
-ReLu
-Convulocional Transposada (128, 64, 3, stride=2, padding=1)
-ReLu
-Convulocional Transposada (64, 32, 3, stride=2, padding=1
-ReLu
-Convulocional Transposada (32, 3, 3, stride=2, padding=1)
+- Convulocional Transposada (256, 128, 3, stride=2, padding=1) 
+- ReLu
+- Convulocional Transposada (128, 64, 3, stride=2, padding=1)
+- ReLu
+- Convulocional Transposada (64, 32, 3, stride=2, padding=1
+- ReLu
+- Convulocional Transposada (32, 3, 3, stride=2, padding=1)
 
 #### Paràmetres
 
