@@ -1,4 +1,4 @@
-# Repte 3: Histologia Digital
+3# Repte 3: Histologia Digital
 
 ## INTRODUCCIÓ
 La funció principal d'un a classificador és assignar etiquetes o categories a noves imatges en funció de les característiques que ha après durant l'entrenament. El procés d'entrenament d'un classificador d'imatges generalment implica alimentar el sistema amb un conjunt de dades d'imatges prèviament etiquetades. El model d'IA utilitza aquestes imatges per aprendre patrons i característiques que són distintives de cada classe o categoria. Un cop entrenat, el classificador pot fer prediccions sobre noves imatges, assignant-los una etiqueta o categoria basada en el seu coneixement previ. La classificació d’imatges pot quedar esbiaxat si  les classes no tenen un número de imatges balancejat. Fent que la red neuronal sigui incapaç d’aprendre o de classificar amb la precisió esperada. 
@@ -21,6 +21,7 @@ El GitHub l'hem distribuït de la següent manera:
   - imatges_originals_test: carpeta que conté les imatges originals que utilitzem com a test que no tenen presència dle elicobacter
   - imatges_reconstruides_test: carpeta que conté les imatges reconstruides del train pel nostre autoencoder
   - Gràfiques: carpeta que conté les gràfiques de les losses tant del train com del test
+  - Grafiques.py: fixter python que conté el codi on es generen les gràfiques de loss del train i test.
 
 
 
@@ -28,8 +29,9 @@ El GitHub l'hem distribuït de la següent manera:
 ## BASE DE DADES
 La base de dades que utilitzem a estat una que se'ns ha prporcionat en el Campus Virtual. La base de dades està distruibuida de la següent manera:
 Una crapeta que està fromada per moltes altres carpetes, on cadascuna fa referència a un pacient i conté les imatges de les mostres del teixit. Aquestes imatges venen etiquetades per la densitat de  Helicobacter pylori: baixa, alta i negativa.  
-En el nostre cas hem decidit separar en train i test, per tal de poder comprovar que el autoencoder que fem funciona correctament i és robust. 
+Per la primera part hem separat en train test ltots els pacients que no tenen presència de l'Helicobacter pylori. En el nostre cas hem decidit separar en train i test, per tal de poder comprovar que el autoencoder que fem funciona correctament i és robust. 
 Pel train hem agafat __ carpetes i pel test hem agafat __ carpetes.
+
 
 ## PROCEDIMENT 
 
@@ -37,13 +39,17 @@ Pel train hem agafat __ carpetes i pel test hem agafat __ carpetes.
 
 Aquesta part consisteix en la creació de l'autoencoder que agafarà mostres de teixit de pacients sans per entrenar. La reconstrucció de teixit sans ha de ser bona i amb pocs errors, per tal que quan el model recontriueixi una imatge amb presència de l'Helicobacter pylori, no la pugui recontruir bé. Amb aquest error de reconstrucció a la segona part podrem diferenciar les imatges amb el Helicobacter pylori i sense ell i classificar-les. Però ara tornant a la primera part, el que hem fet per obtenir una xarxa neuronal correcte i robusta ha estat el següent:
 Primer de tot disminuïr la mida de les imatges, és a dir, les hem convertit de 256x256x3 a 64x64x3.
+
 Tot seguit amb molt de prova i error, hem modificat i provat molts paràmetres de la xarxa, com ara canviar el número de neurones per cada capa, posar més o menys capes, el learning rate també l'hem anat canviant, i ajustant segons els resultats de les losses que ens donaven, tant train com test, i ajustant també segons la loss amb el MSE i comparant la imatge generada del autoencoder amb la original. També s’ha anat canvinat el criterion i el número de époques per seguir perfilant l'obtenció d’una gràfica de loss adequada. Aquesta prova de parametres de la xarxa s'ha anat combinant amb diferentes èpoques.
 
 
-La creació autoencoder segueix la següent de metodología, quedant la següent arquitectura del encoder i decoder:
+La creació autoencoder segueix la següent de metodología, quedant la següent arquitectura del encoder i el decoder:
 
-#### Enoder
-L'encoder és responsable de transformar la imatge original a una imatge de baixa dimensionalitat. El nostre encoder consisteix en capes de convolució seguides de funcions d'activació ReLU i capes de max pooling. Cada capa de convolució aprèn a extreure característiques específiques de l'entrada. Les capes de max pooling redueixen progressivament les dimensions espacials, ajudant a crear una representació comprimida de l'entrada. La darrera capa de l'encoder redueix l'entrada a una representació de baixa dimensionalitat, també coneguda com a espai latent.
+#### Encoder
+L'encoder és responsable de transformar la imatge original a una imatge de baixa dimensionalitat. El nostre encoder consisteix en capes de convolució seguides de funcions d'activació ReLU i capes de max pooling. Cada capa de convolució aprèn a extreure característiques específiques de l'entrada. Les capes de max pooling redueixen progressivament les dimensions espacials, ajudant a crear una representació comprimida de l'entrada. 
+Hem decidit utilitzar les capes convolucionals 2d, ja que en el nostre cas ens va bé per reduir la dimensionalitat i per captar tots els possibles patrons que segueixen les imatges. 
+Per altra banda hem decidit utilitzar un nº de filtres bastant reduit per tal d'assolir el autoencoder esbiaxat.
+Tant al passing com a l'stride els hi hem possat un valor de 1, ja que volem que es mantegui la dimensionalitat (padding) i no saltar-nos cap píxel (stride).
 
 Convolucional - 2D(3, 32, 3, stride=1, padding=1)
 ReLu 
@@ -59,7 +65,11 @@ ReLu
 MaxPool (2, stride=2, padding=1)
 
 
-### Decoder
+
+#### Decoder
+
+El decoder s'encarrega de generar amb la sortida del encoder la imatge original d'entrada d'aquest, és a dir, pren la representació de baixa dimensionalitat generada pel encoder i la reconstrueix de nou a la forma original i que sigui el més semblant possible a la entrada original.
+Cada capa deconvolucional o convolució transposada aprèn a generar característiques que són inverses a les apreses per les capes corresponents del encoder. L'ús de funcions d'activació ReLU també ajuda en aquest procés.
 
 Convulocional Transposada (256, 128, 3, stride=2, padding=1) 
 ReLu
@@ -69,20 +79,21 @@ Convulocional Transposada (64, 32, 3, stride=2, padding=1
 ReLu
 Convulocional Transposada (32, 3, 3, stride=2, padding=1)
 
-### Parametres
+#### Paràmetres
+
+Els paràmetres que hem utilitzat al final han estat els següents:
 - Optimizer: Adamax
 - Criterion: MSELoss
 - lr = 0.001
 - epoques = 200
 
+#### Loss
 
-La generació de Losses 
+Entre les imatges generades per l'autoencoder i les orignals calculem la seva diferència i amb el optimizer MSE, obtenim la loss, específicament una loss per les dades train i una loss per les dades test. Això ho guardem en un objecte pickle, per tal de poder manipular més endavant com volguem.
+El codi on generem els gràfics pertinents està al fixter "grafiques.py".
+Aquestes gràfiques ens serveixen per monitoritzar i verue que el autoencoder és robust i correcte i a la vegada esbiaixat, per tal de no poder recrear la imatge amb el bacteri. 
 
-Entre les imatges generades per l'autoencoder i les orignals calculem la seva diferència i amb MSE i aixì obtenim la nostre loss. Mostrem la loss del nostre train i del test veiem si el nostre autoencoder generalitza bé per generar parts de teixit sa. Creant el model sense la capacitat de generar el Helicobacter pylori. Ha train tenim 12 carpetes pel train 
-acabar esto cuando acabe primera parte **********************************
  
-
-
 ### SEGONA PART: CLASSIFICACIÓ
 
 Després de entrenar l'autoencoder, hem de fer el classificador per aquest procés hem decidit fer boxplot de les loss, per les dues classes per veure la diferencia que hi ha habia entre ells, ja que la loss de les que tenen el Helicobacter pylori ha de ser més gran que que les que no el tenen. Al visualitzar els boxplots veiem que no hi ha molta diferencia entre ells ja que la part del bacteri és molt reduida i no marca la diferencia amb les altres parts de color blau. Per tant per veure la diferencia només tractarem amb el canal vermell ja que el teixit sa no té presencia d'aquest color i el autoencoder no ha rebut cap imatge amb vermell per tan no el pot generar. Al calcular la loss només amb el canal vermell podem observar que el resultat dels boxplots és significatiu, ja que les parts sanen no tenen error i les parts infectades si. 
