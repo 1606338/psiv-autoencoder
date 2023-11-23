@@ -147,9 +147,9 @@ Podem veure que les gràfiques de loss on tenim com a train 10, 20 i 30 pacients
 
 La ràpida disminució inicial de la pèrdua podria podria ser pel conegut fenòmen "ajust fi", on el model s'adapta de manera eficient a les característiques del conjunt d'entrenament. Aquest procés és comú i sol ser un senyal positiu, indicant que la xarxa neuronal està aprenent de manera efectiva al principi de l'entrenament.
 
-No obstant això, a mesura que avancen les èpoques, s'observen pics i/o soroll a la corba de la loss. Aquest comportament podria ser que la xarxa neuronal està capturant característiques específiques del conjunt train que podrien no ser generalitzables a dades no vistes. Tot i que, quan posem cada vegada més pacients al conjunt d'entrenament, la loss millora i aquests pics van disminuïnt, per tant, podem dir que quan més pacients millor entrena.
+No obstant això, a mesura que avancen les èpoques, s'observen pics i/o soroll a la corba de la loss. Això és degut a que hi ha variabilitat estocàstica. Però, encara així podem veure que amb més pacients per entrenar menys pics, per tant vol dir que no afecta massa. 
 
-Per altra banda, tenim la loss del test, aquesta també presenta bastants pics, això és degut al sobreajustament del train.
+Per altra banda, podem veure que la loss del test segueix la mateixa tendència que la del train, així doncs podem afirmar que aprén igual de bé, però també té presència de pics per tant hi ha aquesta variablitat estocàstica. 
 (podeu mirar les gràfiques a la carpeta Grafiques)
 
 
@@ -159,8 +159,8 @@ Per altra banda, tenim la loss del test, aquesta també presenta bastants pics, 
 ## CONCLUSIONS
 
 Podem concloure que l'autoencoder està bastant esbiaixat a les dades sanes i per tant podem afirmar que reconstrueix correctament les imatges sense bacteri i reconstrueix com volem le simatges amb presència del bascteri.
-Tot i que les reconstruccions estan bastant bé, les losses mostres que el autoencoder no està del tot generalitzat i per tant la loss del test mostra bastants pics i sorolls. 
-La raó per la qual no hem generalitzat o hem especificat massa ha estat, que sinó reconstruia les imatges amb el bacteri perectament, és a dir, amb la taca vermella en el teixit, en comptes de tot balu. 
+Tot i que les reconstruccions estan bastant bé, Per altra banda, a causa de la variablitat estocàstica fa que les losses de train i test tinguin una mica de soroll. Però hem vist que com més pacients per entrenar menys soroll, així doncs vol dir que encara que hi ha aquesta variabilitat estocàstica no afecta massa, però per exemple a la del etst si, perquè sempre tenim 5 pacients. 
+
 
 Per altra banda, podem vuere que la classificació ....
 Per veure que també classifica el nostre model ens bassat en la ROC-curve i segons el treshold que marca la gràfica observem el recall que obtindrem. Tenim un recall de ****** rellenar caundo ete el final *********.
