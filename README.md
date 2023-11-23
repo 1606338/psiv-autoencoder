@@ -147,10 +147,10 @@ Podem veure que les gràfiques de loss on tenim com a train 10, 20 i 30 pacients
 
 La ràpida disminució inicial de la pèrdua podria podria ser pel conegut fenòmen "ajust fi", on el model s'adapta de manera eficient a les característiques del conjunt d'entrenament. Aquest procés és comú i sol ser un senyal positiu, indicant que la xarxa neuronal està aprenent de manera efectiva al principi de l'entrenament.
 
-No obstant això, a mesura que avancen les èpoques, s'observen pics i/o soroll a la corba de la loss. Això és degut a que hi ha variabilitat estocàstica. Però, encara així podem veure que amb més pacients per entrenar menys pics, per tant vol dir que no afecta massa. 
+No obstant això, a mesura que avancen les èpoques, s'observen pics i/o soroll a la corba de la loss. Això és degut a que hi ha variabilitat estocàstica. Però, encara així podem veure que amb més pacients per entrenar, menys pics, per tant vol dir que no afecta massa. 
 
 Per altra banda, podem veure que la loss del test segueix la mateixa tendència que la del train, així doncs podem afirmar que aprén igual de bé, però també té presència de pics per tant hi ha aquesta variablitat estocàstica. 
-(podeu mirar les gràfiques a la carpeta Grafiques)
+(podeu mirar les gràfiques a la carpeta Grafiques, les gràfiques són les següents:)
 
 
 
