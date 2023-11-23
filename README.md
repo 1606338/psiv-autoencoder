@@ -111,19 +111,19 @@ Aquí radica la part important, hi haurà més diferència en les imatges positi
 
 Per fer la diferència simplement restarem la entrada i la sortida. Nomes restarem el canal blau ja que aquets es el que major diferencia presta entre la sortida i la entrada en les imatges positives. Això es perque tractem amb rgb. Els punts 'vermells' de les bacteries tenen un valor de vermell baix i per tant tot i que aquest valor desaparegui en cuan a nombres no es nota. En canvi en el canal blau si que hi ha diferrencia. En aquests punts el autoencoder s'inventa punts blaus que al ser mes clars si que tene un valor elevat. Basicament en el canal vermell pasem de valor baix a valor molt baix mentre que en el blau pasem de valor molt baix a valor alt.
 
+En la carpeta grafiques podem trobar un seguit de histogrames on veiem les losses per cada un dels canals i separarat per clase. Aqui veiem com els histogrames de el canal general, es a dir tot, i del canal vermell son molt semblants. Hi ha bastant solapament (es poden comparar facilment ja que tenen el mateix eix x). En cambi en el canal blau no trobem tant solapament. En el cas del model 50 trobem que mes de la meitat de les dades es troben perfectament separables. Parlarem mes de això en el partat de resultats.
 
-Una vegada tenim el llistat de diferències toca trobar quin és el treshold que separa les dues classes. Per fer-ho hem utilitzat la corba roc.
+
+Una vegada tenim el llistat de diferències toca trobar quin és el millor treshold que separa les dues classes. Per fer-ho hem utilitzat la corba roc.
 Aquest mètode és resistent al des-balançeig, pràcticament està fet per evitar això, i per tant el nostre salvador en aquest cas. Dividirem la sortida en train i test. Tot i que no entrenarem res, trobarem els valors de treshold en base a un i els provarem en base a l'altre.
 Podem veure les corbes roc a la carpeta de "Grafiques".
 D'aqui podem trobar alguns punts optims de tall, basats en la proximitat a la cantonada esquerra, el f-score o altres mètriques que ens interessi.
-En el nostre cas i hem escollit el mes proxim a la cantonada esquerra.
-Ara bé, per trobar ara els valors de com de bo és tot el nostre sistema simplement hem de passar la part de test per aquest treshold i calcular les mètriques.
-Un cop fet ens dona ****
+En el nostre cas i hem escollit el mes proxim a la cantonada esquerra superior. No hem agafat altres funcions ja que hem trobat que aquestes agafaven punts mes a la esquerra (en la grafica) del que voliem. Al ser un cas medic volem que no sens escapin posibles poacients amb enfermatats per tant buscarem un valor de true positive rate elevat tot i que impliqui augmentar false positive rate.
 
-Si està malament:
+Per tant: Pasarem tot el conjunt de dades per els autonecoders, dividirem les loses resultants en train i test, farem una roc curve amb el train, calcularem el treshold mes proper a la cantonada esquerra superior i aplicarem aquest treshold al conjunt test. Comparant aquest ultim resultat amb el target real obtindrem les metriques.
 
-Historogrames,
-explicació de què generalitza
+
+
 
 
 ## RESULTATS
@@ -155,6 +155,24 @@ Per altra banda, podem veure que la loss del test segueix la mateixa tendència 
 
 
 ### Resultat Classificació
+
+Pasant les imatges del segon dataset i calculant la diferencia com hem descrit anteriorment, ens trobem amb un problema. Els models no son capaç de distingir entre un 40% de les mostres positives, i les mostres negatives(amb la resta si que ho fa). Això es pot veure tant amb es histogrames com amb la roc curve. En el histograma podem veure que hi ha valors presents en ambdues imatges, En la curva roc podem veure com el true positive rate augmenta rapidament fins a cert punt , on tomba cap a la dreta. Es aquest punt on es començen a solapar fortament positius i negatius.
+Això vol dir que per aquests positius el nostre model els esta reconstuint be i per això no es capaç de deiferenciar-los. El model generalitza massa.
+
+
+
+
+|               | F-score | True positive rate  | False positive rate| Accuracy |
+| ------------- | ------------- | ------------- | ------------- | ------------- |
+| Model 10     | 0.5414  | 0.7246  | 0.1461  | 0.834  |
+| Model 20     | 0.5632  | 0.7462  | 0.1339  | 0.848  |
+| Model 30     | 0.4811  | 0.7647  | 0.2152  | 0.780  |
+| Model 50     | 0.3963  | 0.7627  | 0.2698  | 0.732  |
+| Model Mitja  | 0.4955±0.0700  | 0.7496±0.0183  | 0.1913±0.0635  | 0.7985±0.0532  |
+
+
+
+
 
 ## CONCLUSIONS
 
