@@ -23,6 +23,8 @@ El GitHub l'hem distribuït de la següent manera:
   - imatges_reconstruides_test_X: carpeta que conté algunes de les imatges reconstruïdes del train pel nostre autoencoder (X fa referència al model)
   - Gràfiques: carpeta que conté les gràfiques de les losses tant de train com de test de tots 4 models
   - Pickle.py: fitxter python que conté el codi on es generen les gràfiques de loss del train i test.
+  - Generador_histogrames.py: fitxer pyhton que conté el codi per llegir les loses i generar/guardar els histogrames
+  - Genarador_roc.py: fitxer pyhton que conté el codi per llegir les loses, generar les corbes roc i els resultats finals.
   - Pickle: carpeta que conté els arxius pickle per fer les losses
   - imagenes_originales_segona_part_X: carpeta que conté imatges amb pacients positius, és a dir, amb el bacteri (X fa referència al model)
   - imagenes_reconstruidas_segona_part_X: carpeta que conté imatges reconstruides de pacients positius (X fa referència al model)
@@ -172,7 +174,7 @@ Deixant això de banda si ens centrem en els resultats finals:
 | Model 20     | 0.5632         | 0.7462         | 0.1339         | 0.848          |
 | Model 30     | 0.4811         | 0.7647         | 0.2152         | 0.780          |
 | Model 50     | 0.3963         | 0.7627         | 0.2698         | 0.732          |
-| Model Mitja  | 0.4955±0.0700  | 0.7496±0.0183  | 0.1913±0.0635  | 0.7985±0.0532  |
+| Model Mitjà  | 0.4955±0.0700  | 0.7496±0.0183  | 0.1913±0.0635  | 0.7985±0.0532  |
 
 
 Veiem que els models són bastant semblants. La propia desviació estàndard de model mitja ja ens ho indica.
