@@ -128,7 +128,6 @@ explicació de què generalitza
 La part de resultats hem decidit dividir-la en dos blocs. Primerament explicarem els resultats del autoencoder i despés de la calssificació.
 
 
-
 ### Resultats Autoencoder
 
 Per comprovar que l'autoencoder és robust i correcte, hem mirat tant les imatges reconstruides dels diferents models, com les losses d'aquest. 
@@ -142,11 +141,14 @@ Una altra manera de veure que el nostre autoencoder està esbiaixat, és comprov
 (per veure les imatges mireu les carpetes que posen imatges_amb_bacteri_original i imatges_amb_bacteri_reconstruida)
 
 Un cop hem comprovat les imatges, ens fixem a les gràfiques de loss de train i test de tots 4 models. 
-Podem veure que les models on el tenim com a train 10, 20 i 30 pacients són molt semblants. La gràfica del train aprés bastant ràpid i comença a e
+Podem veure que les gràfiques de loss on tenim com a train 10, 20 i 30 pacients són molt semblants. Al llarg de les 200 èpoques per la nostra xarxa neuronal que utilitza capes de convolució (Conv2), capes de maxpooling i funcions d'activació ReLU, es observa un patró inicial bastant eficient. La loss comença en un valor relativament baix, concretament en tots 3 casos, indicant un bon ajust inicial del model als patrons presents en les dades d'entrenament.
 
-Com ha resultats de la loss pels diferents trains hem obtingut han resultats molt semblants. Com es pot veure a les imatges de la carpeta gràfiques. La principal diferencia entre les gràfiques que tenen diferent train és que la de 10 imatges és la que te pitjor resultats amb una loss de 0.00105 en el train i 0.00140 en el test, amb 200 époques. Per altre banda la de 20 imatges ha obtingut una loss de 0.00088 i 0.00105 en train i test respectivament molt semblant a la de 30 imatges que consta dels següents resultats 0.00076 i 0.00112 en train i test  respectivament. Veient la caiguda de la loss i els resultats final hem vist que la de 30 obté millor resultats ja que té la loss de test i train  més baixex, degut a que és la que més imatges d'entrenament per tant pot recrear millor el teixit, ja que tots utitlizen el mateix atuoencoder i paràmetres. Les losses de train i test obntingudes en conjunt més petites són  0.00076 i 0.00112 en train i test respectivament.
- **acabar cuando acabe de ejecutar **
+La ràpida disminució inicial de la pèrdua podria podria ser pel conegut fenòmen "ajust fi", on el model s'adapta de manera eficient a les característiques del conjunt d'entrenament. Aquest procés és comú i sol ser un senyal positiu, indicant que la xarxa neuronal està aprenent de manera efectiva al principi de l'entrenament.
 
+No obstant això, a mesura que avancen les èpoques, s'observen pics i/o soroll a la corba de la loss. Aquest comportament podria ser que la xarxa neuronal està capturant característiques específiques del conjunt train que podrien no ser generalitzables a dades no vistes. Tot i que, quan posem cada vegada més pacients al conjunt d'entrenament, la loss millora i aquests pics van disminuïnt, per tant, podem dir que quan més pacients millor entrena.
+
+Per altra banda, tenim la loss del test, aquesta també presenta bastants pics, això és degut al sobreajustament del train.
+(podeu mirar les gràfiques a la carpeta Grafiques)
 
 
 
@@ -154,8 +156,11 @@ Com ha resultats de la loss pels diferents trains hem obtingut han resultats mol
 
 ## CONCLUSIONS
 
-L'autoencoder es veu bastant esbiaxat cap a les imatges sanes per tant podem les imatges reconstruides eren bastant semblants a les esperades, al no poder-se observar el bacteri en les imatges on el pacient està infectat. Degut a que amb les capes convulocionas ens permet etruere les característiques necesaries per reconstruir les imatges que rep, com si fossin sanes.
+Podem concloure que l'autoencoder està bastant esbiaixat a les dades sanes i per tant podem afirmar que reconstrueix correctament les imatges sense bacteri i reconstrueix com volem le simatges amb presència del bascteri.
+Tot i que les reconstruccions estan bastant bé, les losses mostres que el autoencoder no està del tot generalitzat i per tant la loss del test mostra bastants pics i sorolls. 
+La raó per la qual no hem generalitzat o hem especificat massa ha estat, que sinó reconstruia les imatges amb el bacteri perectament, és a dir, amb la taca vermella en el teixit, en comptes de tot balu. 
 
+Per altra banda, podem vuere que la classificació ....
 Per veure que també classifica el nostre model ens bassat en la ROC-curve i segons el treshold que marca la gràfica observem el recall que obtindrem. Tenim un recall de ****** rellenar caundo ete el final *********.
 
 Tot i que l'apart de reconstruir imatges del autoencoder va força bé hi en alguns casos on el vermell no lo suficient significatiu i per tant no genera suficient loss perquè es pogui classificar com a infectat i no supera el threshold mercat la gràfica ROC-curve. 
