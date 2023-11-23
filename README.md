@@ -113,10 +113,10 @@ Per fer la diferència simplement restarem la entrada i la sortida. Nomes restar
 
 
 Una vegada tenim el llistat de diferències toca trobar quin és el treshold que separa les dues classes. Per fer-ho hem utilitzat la corba roc.
-Aquest mètode és resident al des-balançeig, pràcticament està fet per evitar això, i per tant el nostre salvador en aquest cas. Dividirem la sortida en train i test. Tot i que no entrenarem res, trobarem els valors de treshold en base a un i els provarem en base a l'altre.
+Aquest mètode és resistent al des-balançeig, pràcticament està fet per evitar això, i per tant el nostre salvador en aquest cas. Dividirem la sortida en train i test. Tot i que no entrenarem res, trobarem els valors de treshold en base a un i els provarem en base a l'altre.
 Podem veure les corbes roc a la carpeta de "Grafiques".
 D'aqui podem trobar alguns punts optims de tall, basats en la proximitat a la cantonada esquerra, el f-score o altres mètriques que ens interessi.
-En el nostre cas i hem escollit *****
+En el nostre cas i hem escollit el mes proxim a la cantonada esquerra.
 Ara bé, per trobar ara els valors de com de bo és tot el nostre sistema simplement hem de passar la part de test per aquest treshold i calcular les mètriques.
 Un cop fet ens dona ****
 
