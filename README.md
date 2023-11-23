@@ -25,7 +25,7 @@ El GitHub l'hem distribuït de la següent manera:
   - Pickle.py: fitxter python que conté el codi on es generen les gràfiques de loss del train i test.
   - Generador_histogrames.py: fitxer pyhton que conté el codi per llegir les loses i generar/guardar els histogrames
   - Genarador_roc.py: fitxer pyhton que conté el codi per llegir les loses, generar les corbes roc i els resultats finals.
-  - Pickle: carpeta que conté els arxius pickle per fer les losses
+  - Pickle: carpeta que conté els arxius pickle amb les losses de la primera i la segona part.
   - imagenes_originales_segona_part_X: carpeta que conté imatges amb pacients positius, és a dir, amb el bacteri (X fa referència al model)
   - imagenes_reconstruidas_segona_part_X: carpeta que conté imatges reconstruides de pacients positius (X fa referència al model)
 
