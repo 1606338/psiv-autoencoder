@@ -21,7 +21,7 @@ El GitHub l'hem distribuït de la següent manera:
   - imatges_reconstruides_train: carpeta que conté les imatges reconstruides del train pel nostre autoencoder
   - imatges_originals_test: carpeta que conté les imatges originals que utilitzem com a test que no tenen presència de l'Helicobacter
   - imatges_reconstruides_test: carpeta que conté les imatges reconstruïdes del train pel nostre autoencoder
-  - Gràfiques: carpeta que conté les gràfiques de ls losses tant de train com de test de tots 4 models
+  - Gràfiques: carpeta que conté les gràfiques de les losses tant de train com de test de tots 4 models
   - Pickle.py: fitxter python que conté el codi on es generen les gràfiques de loss del train i test.
   - Pickle: carpeta que conté els arxius pickle per fer les losses
 
