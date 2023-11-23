@@ -94,7 +94,7 @@ Els paràmetres que hem utilitzat al final han estat els següents:
 #### Loss
 
 Entre les imatges generades per l'autoencoder i les originals calculem la seva diferència i amb l'optimizer MSE, obtenim la loss, específicament una loss per les dades train i una loss per les dades test. Això ho guardem en un objecte pickle, per tal de poder manipular més endavant com vulguem.
-El codi on generem els gràfics pertinents està al fitxer "grafiques.py".
+El codi on generem els gràfics pertinents està al fitxer "pickle.py".
 Aquestes gràfiques ens serveixen per monitorar i veure que l'autoencoder és robust i correcte i a la vegada esbiaixat, per tal de no poder recrear la imatge amb el bacteri.
 
  
