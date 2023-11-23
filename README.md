@@ -32,7 +32,7 @@ El GitHub l'hem distribuït de la següent manera:
 La base de dades que utilitzem han estat una que se'ns ha proporcionat en el Campus Virtual. La base de dades està distribuïda de la següent manera:
 Una carpeta que està formada per moltes altres carpetes, on cadascuna fa referència a un pacient i conté les imatges de les mostres del teixit. Aquestes imatges venen etiquetades per la densitat d'Helicobacter pylori: baixa, alta i negativa.
 Per la primera part hem separat en train test tots els pacients que no tenen presència de l'Helicobacter pylori. En el nostre cas hem decidit separar en train i test, per tal de poder comprovar que l'autoencoder que fem funciona correctament i és robust.
-Pel train hem agafat 10,20,30,50 carpetes, és a dir, fem  4 models amb diferents valors de carpetes, però amb un test constant de 5 carpetes sempre. Hem anat probant al principi amb pocs pacients i hem anat augmentant al anar fent proves per tant tenim 4 models de base de dades.
+Pel train hem agafat 10,20,30,50 pacients (carpetes), és a dir, fem  4 models amb diferents número de pacients, però amb un test constant de 5 pacients sempre. Hem anat probant al principi amb pocs pacients i hem anat augmentant al anar fent proves per tant tenim 4 models de base de dades.
 
 
 ## PROCEDIMENT 
@@ -100,21 +100,21 @@ Aquestes gràfiques ens serveixen per monitorar i veure que l'autoencoder és ro
 
 Després d'haver entrenat un autoencoder amb només pacients sans, utilitzarem aquest model per poder classificar pacients no sans, és a dir, positius; i sans, és a dir, negatius. Per fer-ho carregarem els models entrenats i els passarem les imatges contendides a la carpeta Annotated patches.
 
-Annotated patches conte 1330 imatges amb tres classes, negatiu, dubtós i positiu. La classe del mig no ens interessa per tant la ignorarem i ens quedarem amb 1255 imatges. Algo important és que ara ja no parlarem de pacients i carpetes sinó d'imatges, no separarem per pacients en cap moment.
-Aquest dataset es troba des-balançejat, tenint només 164 positius d'aquest 1255. Per tant haurem de utlitzar tècniques que siguin resistents a això. En aquest dataset trobem un arxiu csv que ens indica el target (si és positiu o negatiu) de cada una de les imatges.
+Annotated patches conte 1330 imatges amb tres classes, negatiu, dubtós i positiu. La classe del mig no ens interessa per tant la ignorarem i ens quedarem amb 1255 imatges. Una dada important és que ara ja no parlarem de pacients i carpetes sinó d'imatges, no separarem per pacients en cap moment.
+Aquest dataset es troba des-balançejat, tenint només 164 positius d'aquest 1255. Per tant haurem d'utlitzar tècniques que siguin resistents a això. En aquest dataset trobem un arxiu csv que ens indica el target (si és positiu o negatiu) de cada una de les imatges.
 
-Llegirem totes les imatges i les passarem pel model, i això ens donarà una imatge reconstruïda. En les imatges sanes la reconstrucció hauria de ser semblant ja que el model ha vist imatges similars anteriorment. Però en veure les imatges positives el model no hauria de ser capaç de reconstruir les bacteries.
-Aquí radica la part important, hi haura més diferència en les imatges positives que en les negatives. Aquesta diferència ens hauria de permetre classificar-les.
+Llegirem totes les imatges i les passarem pel model, i això ens donarà una imatge reconstruïda. En les imatges sanes la reconstrucció hauria de ser semblant, ja que el model ha vist imatges similars anteriorment. Però en veure les imatges positives el model no hauria de ser capaç de reconstruir les bacteries.
+Aquí radica la part important, hi haurà més diferència en les imatges positives que en les negatives. Aquesta diferència ens hauria de permetre classificar-les.
 
-Per fer la diferència simplement restarem la entrada i la sortida. Clar que només ho farem per el canal blau. Això es deu a que es el que tindrà major diferència entre entrada i sortida, ja que en les positives el model s'haurà inventat punts blaus. Pensem que és millor fer-ho així que pel canal vermell. El motiu és que quan passa de tenir vermell a no tenir, en ser aquest 'vermell' molt fosc no hi haurà gaire diferència en números. En canvi, en el canal blau passem d'un punt que te un valor petit (ja que és fosc) a un valor molt gran.
+Per fer la diferència simplement restarem la entrada i la sortida. Clar que només ho farem per el canal blau. Això és degut a que és el que tindrà major diferència entre entrada i sortida, ja que en les positives el model s'haurà inventat punts blaus. Pensem que és millor fer-ho així que pel canal vermell. El motiu és que quan passa de tenir vermell a no tenir, en ser aquest 'vermell' molt fosc no hi haurà gaire diferència en números. En canvi, en el canal blau passem d'un punt que te un valor petit (ja que és fosc) a un valor molt gran.
 
 Una vegada tenim el llistat de diferències toca trobar quin és el treshold que separa les dues classes. Per fer-ho hem utilitzat la corba roc.
-Aquest mètode és resident al des-balançeig ,pràcticament està fet per evitar això, i per tant el nostre salvador en aquest cas. Dividirem la sortida en train i test. Tot i que no entrenarem res trobarem els valors de treshold en base a un i els provarem en base a l'altre.
-Podem veure les corbes roc en *****
-D'aqui podem trobar varios punts optims de tall, basats en la proximitat a la cantonada esquerra, el f-score o altres metriques que ens interesi.
-Hem escollit *****
-Ara per trobar els valors de com de bo es tot el nostre sistema simplement hem de pasar la part de test per aquest treshold i calcular les metriques.
-Ens dona ****
+Aquest mètode és resident al des-balançeig, pràcticament està fet per evitar això, i per tant el nostre salvador en aquest cas. Dividirem la sortida en train i test. Tot i que no entrenarem res, trobarem els valors de treshold en base a un i els provarem en base a l'altre.
+Podem veure les corbes roc a la carpeta de "Grafiques".
+D'aqui podem trobar alguns punts optims de tall, basats en la proximitat a la cantonada esquerra, el f-score o altres mètriques que ens interessi.
+En el nostre cas i hem escollit *****
+Ara bé, per trobar ara els valors de com de bo és tot el nostre sistema simplement hem de passar la part de test per aquest treshold i calcular les mètriques.
+Un cop fet ens dona ****
 
 Si està malament:
 
@@ -123,17 +123,21 @@ explicació de què generalitza
 
 
 ## RESULTATS
-
-Tenim dos resultats un per saber que tan bé funciona el nostre autoencoder amb unes gráfiques de la loss i per saber que també classifiquem pacients dient quins són negatius i quins són positius.  
-
+La part de resultats hem decidit dividir-la en dos blocs. Primerament explicarem els resultats del autoencoder i despés de la calssificació.
 
 
 
 ### Resultats Autoencoder
- Com ha resultats de la loss pels diferents trains hem obtingut han resultats molt semblants. Com es pot veure a les imatges de la carpeta gràfiques. La principal diferencia entre les gràfiques que tenen diferent train és que la de 10 imatges és la que te pitjor resultats amb una loss de 0.00105 en el train i 0.00140 en el test, amb 200 époques. Per altre banda la de 20 imatges ha obtingut una loss de 0.00088 i 0.00105 en train i test respectivament molt semblant a la de 30 imatges que consta dels següents resultats 0.00076 i 0.00112 en train i test  respectivament. Veient la caiguda de la loss i els resultats final hem vist que la de 30 obté millor resultats ja que té la loss de test i train  més baixex, degut a que és la que més imatges d'entrenament per tant pot recrear millor el teixit, ja que tots utitlizen el mateix atuoencoder i paràmetres. Les losses de train i test obntingudes en conjunt més petites són  0.00076 i 0.00112 en train i test respectivament.
+
+Per comprovar que l'autoencoder és robust i correcte, hem mirat tant les imatges reconstruides com les losses del models. 
+
+Al compra
+Al veure les imatges reconstruides podem veure que fa una reoconstrucció de les imatges bastant properes a les orignals amb la diferencia de que les reconstruides són borrosses i les que estan infectades no tenen la capacitat de generar el color vermell. Per tant reconstrucció de les infectades no tenen el color vermell. Aquesta compració es poden veure en les carpetes d'imatges originals i en les carpetes d'imatges reconstruides. 
+
+Com ha resultats de la loss pels diferents trains hem obtingut han resultats molt semblants. Com es pot veure a les imatges de la carpeta gràfiques. La principal diferencia entre les gràfiques que tenen diferent train és que la de 10 imatges és la que te pitjor resultats amb una loss de 0.00105 en el train i 0.00140 en el test, amb 200 époques. Per altre banda la de 20 imatges ha obtingut una loss de 0.00088 i 0.00105 en train i test respectivament molt semblant a la de 30 imatges que consta dels següents resultats 0.00076 i 0.00112 en train i test  respectivament. Veient la caiguda de la loss i els resultats final hem vist que la de 30 obté millor resultats ja que té la loss de test i train  més baixex, degut a que és la que més imatges d'entrenament per tant pot recrear millor el teixit, ja que tots utitlizen el mateix atuoencoder i paràmetres. Les losses de train i test obntingudes en conjunt més petites són  0.00076 i 0.00112 en train i test respectivament.
  **acabar cuando acabe de ejecutar **
 
-Al veure les imatges reconstruides podem veure que fa una reoconstrucció de les imatges bastant properes a les orignals amb la diferencia de que les reconstruides són borrosses i les que estan infectades no tenen la capacitat de generar el color vermell. Per tant reconstrucció de les infectades no tenen el color vermell. Aquesta compració es poden veure en les carpetes d'imatges originals i en les carpetes d'imatges reconstruides. 
+
 
 
 ### Resultat Classificació
