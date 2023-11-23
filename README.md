@@ -109,18 +109,18 @@ Llegirem totes les imatges i les passarem pel model, i això ens donarà una ima
 Aquí radica la part important, hi haurà més diferència en les imatges positives que en les negatives. Aquesta diferència ens hauria de permetre classificar-les.
 
 
-Per fer la diferència simplement restarem la entrada i la sortida. Nomes restarem el canal blau ja que aquets es el que major diferencia presta entre la sortida i la entrada en les imatges positives. Això es perque tractem amb rgb. Els punts 'vermells' de les bacteries tenen un valor de vermell baix i per tant tot i que aquest valor desaparegui en cuan a nombres no es nota. En canvi en el canal blau si que hi ha diferrencia. En aquests punts el autoencoder s'inventa punts blaus que al ser mes clars si que tene un valor elevat. Basicament en el canal vermell pasem de valor baix a valor molt baix mentre que en el blau pasem de valor molt baix a valor alt.
+Per fer la diferència simplement restarem l'entrada i la sortida. Només restarem el canal blau ja que aquets és el que major diferència presta entre la sortida i la entrada en les imatges positives. Això es perquè tractem amb rgb. Els punts 'vermells' de les bacteries tenen un valor de vermell baix i per tant tot i que aquest valor desaparegui en cuan a nombres no es nota. En canvi, en el canal blau sí que hi ha diferència. En aquests punts l'autoencoder s'inventa punts blaus que al ser més clars sí que té un valor elevat. Bàsicament en el canal vermell passem de valor baix a valor molt baix mentre que en el blau passem de valor molt baix a valor alt.
 
 En la carpeta grafiques podem trobar un seguit de histogrames on veiem les losses per cada un dels canals i separarat per clase. Aqui veiem com els histogrames de el canal general, es a dir tot, i del canal vermell son molt semblants. Hi ha bastant solapament (es poden comparar facilment ja que tenen el mateix eix x). En cambi en el canal blau no trobem tant solapament. En el cas del model 50 trobem que mes de la meitat de les dades es troben perfectament separables. Parlarem mes de això en el partat de resultats.
 
 
 Una vegada tenim el llistat de diferències toca trobar quin és el millor treshold que separa les dues classes. Per fer-ho hem utilitzat la corba roc.
-Aquest mètode és resistent al des-balançeig, pràcticament està fet per evitar això, i per tant el nostre salvador en aquest cas. Dividirem la sortida en train i test. Tot i que no entrenarem res, trobarem els valors de treshold en base a un i els provarem en base a l'altre.
-Podem veure les corbes roc a la carpeta de "Grafiques".
-D'aqui podem trobar alguns punts optims de tall, basats en la proximitat a la cantonada esquerra, el f-score o altres mètriques que ens interessi.
-En el nostre cas i hem escollit el mes proxim a la cantonada esquerra superior. No hem agafat altres funcions ja que hem trobat que aquestes agafaven punts mes a la esquerra (en la grafica) del que voliem. Al ser un cas medic volem que no sens escapin posibles poacients amb enfermatats per tant buscarem un valor de true positive rate elevat tot i que impliqui augmentar false positive rate.
+Aquest mètode és resistent al des-balanceig, pràcticament està fet per evitar això, i per tant el nostre salvador en aquest cas. Dividirem la sortida en train i test. Tot i que no entrenarem res, trobarem els valors de treshold en base a un i els provarem en base a l'altre.
+Podem veure les corbes roc a la carpeta de "Gràfiques".
+D'aquí podem trobar alguns punts òptims de tall, basats en la proximitat a la cantonada esquerra, el f-score o altres mètriques que ens interessi.
+En el nostre cas i hem escollit el més pròxim a la cantonada esquerra superior. No hem agafat altres funcions ja que hem trobat que aquestes agafaven punts més a l'esquerra (en la gràfica) del que volíem. Al ser un cas mèdic volem que no sens escapin possibles pacients amb malalties per tant buscarem un valor de true positive rate elevat tot i que impliqui augmentar false positive rate.
 
-Per tant: Pasarem tot el conjunt de dades per els autonecoders, dividirem les loses resultants en train i test, farem una roc curve amb el train, calcularem el treshold mes proper a la cantonada esquerra superior i aplicarem aquest treshold al conjunt test. Comparant aquest ultim resultat amb el target real obtindrem les metriques.
+Per tant: Passarem tot el conjunt de dades per els autonecoders, dividirem les loses resultants en train i test, farem una roc curve amb el train, calcularem el treshold més proper a la cantonada esquerra superior i aplicarem aquest treshold al conjunt test. Comparant aquest últim resultat amb el target real obtindrem les mètriques.
 
 
 
@@ -156,21 +156,23 @@ Per altra banda, podem veure que la loss del test segueix la mateixa tendència 
 
 ### Resultat Classificació
 
-Pasant les imatges del segon dataset i calculant la diferencia com hem descrit anteriorment, ens trobem amb un problema. Els models no son capaç de distingir entre un 40% de les mostres positives, i les mostres negatives(amb la resta si que ho fa). Això es pot veure tant amb es histogrames com amb la roc curve. En el histograma podem veure que hi ha valors presents en ambdues imatges, En la curva roc podem veure com el true positive rate augmenta rapidament fins a cert punt , on tomba cap a la dreta. Es aquest punt on es començen a solapar fortament positius i negatius.
-Això vol dir que per aquests positius el nostre model els esta reconstuint be i per això no es capaç de deiferenciar-los. El model generalitza massa.
+Passant les imatges del segon dataset i calculant la diferència com hem descrit anteriorment, ens trobem amb un problema. Els models no són capaç de distingir entre un 40% de les mostres positives, i les mostres negatives (amb la resta sí que ho fa). Això es pot veure tant amb es histogrames com amb la roc curve. En el histograma podem veure que hi ha valors presents en ambdues imatges. En la curva roc podem veure com el true positive rate augmenta rapidament fins a cert punt, on tomba cap a la dreta. És aquest punt on es comencen a superposar fortament positius i negatius.
+Això vol dir que per aquests positius el nostre model els està reconstruint bé, i per això no és capaç de diferenciar-los. El model generalitza massa.
+
+Deixant això de banda si ens centrem en els resultats finals:
 
 
-
-
-|               | F-score | True positive rate  | False positive rate| Accuracy |
-| ------------- | ------------- | ------------- | ------------- | ------------- |
-| Model 10     | 0.5414  | 0.7246  | 0.1461  | 0.834  |
-| Model 20     | 0.5632  | 0.7462  | 0.1339  | 0.848  |
-| Model 30     | 0.4811  | 0.7647  | 0.2152  | 0.780  |
-| Model 50     | 0.3963  | 0.7627  | 0.2698  | 0.732  |
+|              | F-score      |True positive rate|False positive rate| Accuracy    |
+| ------------ | -------------- | -------------- | -------------- | -------------- |
+| Model 10     | 0.5414         | 0.7246         | 0.1461         | 0.834          |
+| Model 20     | 0.5632         | 0.7462         | 0.1339         | 0.848          |
+| Model 30     | 0.4811         | 0.7647         | 0.2152         | 0.780          |
+| Model 50     | 0.3963         | 0.7627         | 0.2698         | 0.732          |
 | Model Mitja  | 0.4955±0.0700  | 0.7496±0.0183  | 0.1913±0.0635  | 0.7985±0.0532  |
 
 
+Veiem que els models són bastant semblants. La propia desviació estàndard de model mitja ja ens ho indica.
+També veiem un patró, a mesura que més dades afegim, més baixa el f-score i l'accuracy. A canvi els valors de True positive rate i False positive rate. Ja que es tracta d'un cas mèdic, nostres preferim aquest segon cas per tant diem que el model 50 és el millor.
 
 
 
@@ -180,9 +182,7 @@ Podem concloure que l'autoencoder està bastant esbiaixat a les dades sanes i pe
 Tot i que les reconstruccions estan bastant bé, Per altra banda, a causa de la variablitat estocàstica fa que les losses de train i test tinguin una mica de soroll. Però hem vist que com més pacients i més èpoques per entrenar, menys soroll hi ha, així doncs vol dir que encara que hi ha aquesta variabilitat estocàstica no afecta massa, però per exemple a la del test si, perquè sempre tenim 5 pacients. 
 
 
-Per altra banda, podem vuere que la classificació ....
-Per veure que també classifica el nostre model ens bassat en la ROC-curve i segons el treshold que marca la gràfica observem el recall que obtindrem. Tenim un recall de ****** rellenar caundo ete el final *********.
+Per ultim, podem veure que la classificació no té els resultats esperats. És capaç de diferenciar entre positius i negatius, però no fins al punt que es necessita per un cas mèdic, on no podem deixar tants positius sense marcar. Diem, per tant, que tenim un bon model, però no un bon model mèdic i no recomanem la seva utilització en casos reals.
 
-Tot i que l'apart de reconstruir imatges del autoencoder va força bé hi en alguns casos on el vermell no lo suficient significatiu i per tant no genera suficient loss perquè es pogui classificar com a infectat i no supera el threshold mercat la gràfica ROC-curve. 
 
 
