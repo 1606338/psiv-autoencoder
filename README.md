@@ -158,7 +158,7 @@ Per altra banda, podem veure que la loss del test segueix la mateixa tendència 
 
 ## CONCLUSIONS
 
-Podem concloure que l'autoencoder està bastant esbiaixat a les dades sanes i per tant podem afirmar que reconstrueix correctament les imatges sense bacteri i reconstrueix com volem le simatges amb presència del bascteri.
+Podem concloure que l'autoencoder està bastant esbiaixat a les dades sanes i per tant podem afirmar que reconstrueix correctament les imatges sense bacteri i reconstrueix com volem le simatges amb presència del bacteri.
 Tot i que les reconstruccions estan bastant bé, Per altra banda, a causa de la variablitat estocàstica fa que les losses de train i test tinguin una mica de soroll. Però hem vist que com més pacients per entrenar menys soroll, així doncs vol dir que encara que hi ha aquesta variabilitat estocàstica no afecta massa, però per exemple a la del etst si, perquè sempre tenim 5 pacients. 
 
 
