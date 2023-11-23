@@ -17,10 +17,10 @@ El GitHub l'hem distribuït de la següent manera:
   - directori modelos: anem guardant els diferents models de l'autoencoder que anem creant
   - autoencoder.py: arxiu on creem l'autoencoder i fem el seu entrenament.
   - segona_part.py: arxiu on es classifica si les imatges tenen o no l'Helicobacter pylori.
-  - imatges_originals_train: carpeta que conté les imatges originals que utilitzem com a train que no tenen presència de l'Helicobacter
-  - imatges_reconstruides_train: carpeta que conté les imatges reconstruides del train pel nostre autoencoder
-  - imatges_originals_test: carpeta que conté les imatges originals que utilitzem com a test que no tenen presència de l'Helicobacter
-  - imatges_reconstruides_test: carpeta que conté les imatges reconstruïdes del train pel nostre autoencoder
+  - imatges_originals_train: carpeta que conté algunes de les imatges originals que utilitzem com a train que no tenen presència de l'Helicobacter
+  - imatges_reconstruides_train: carpeta que conté algunes de les imatges reconstruides del train pel nostre autoencoder
+  - imatges_originals_test: carpeta que conté algunes de les imatges originals que utilitzem com a test que no tenen presència de l'Helicobacter
+  - imatges_reconstruides_test: carpeta que conté algunes de les imatges reconstruïdes del train pel nostre autoencoder
   - Gràfiques: carpeta que conté les gràfiques de les losses tant de train com de test de tots 4 models
   - Pickle.py: fitxter python que conté el codi on es generen les gràfiques de loss del train i test.
   - Pickle: carpeta que conté els arxius pickle per fer les losses
