@@ -89,7 +89,7 @@ Els paràmetres que hem utilitzat al final han estat els següents:
 - Optimizer: Adamax
 - Criterion: MSELoss
 - lr = 0.001
-- epoques = 200
+- epoques = 200 (menys a la de 50 pacients al train que tenim 350 èpoques)
 
 #### Loss
 
@@ -131,10 +131,18 @@ La part de resultats hem decidit dividir-la en dos blocs. Primerament explicarem
 
 ### Resultats Autoencoder
 
-Per comprovar que l'autoencoder és robust i correcte, hem mirat tant les imatges reconstruides com les losses del models. 
+Per comprovar que l'autoencoder és robust i correcte, hem mirat tant les imatges reconstruides dels diferents models, com les losses d'aquest. 
 
-Al compra
-Al veure les imatges reconstruides podem veure que fa una reoconstrucció de les imatges bastant properes a les orignals amb la diferencia de que les reconstruides són borrosses i les que estan infectades no tenen la capacitat de generar el color vermell. Per tant reconstrucció de les infectades no tenen el color vermell. Aquesta compració es poden veure en les carpetes d'imatges originals i en les carpetes d'imatges reconstruides. 
+Al comparar les imatges originals i les reconstruides de tots els models, podem veure que es reconstrueixen bastant bé les imatges del train, tot i que estan una mica borroses, l'autoencoder és el suficientment específic i detallat per obtenir tots els patrons que hi ha a les imatges i reconstruir-les satisfactoriament. A més a més, una de les raons que surten borroses les imatges tan en les originals com les reconstruides és perquè al principi les fem més petites, de 256x256x3 a 64x64x3.
+(per veure les imatges mireu les carpetes que posen imatges_originals_train_X i imatges_reconstruides_train_X)
+
+Per altra banda, també hem comprovat que és robust i que no hi ha overfitting, així doncs provant també amb els pacients test, les imatges és reconstrueixen igual de bé que en el train. (per veure les imatges mireu les carpetes que posen imatges_originals_test_X i imatges_reconstruides_test_X)
+
+Una altra manera de veure que el nostre autoencoder està esbiaixat, és comprovar amb imatges de pacients infectats. Les imatges es reconstrueixen sense reconstruir la part vermella que és la part infectada del teixit, i la reconstrueix de color blau. Per tant comprovem que efectivament el nostre autoencoder està esbiaixat. 
+(per veure les imatges mireu les carpetes que posen imatges_amb_bacteri_original i imatges_amb_bacteri_reconstruida)
+
+Un cop hem comprovat les imatges, ens fixem a les gràfiques de loss de train i test de tots 4 models. 
+Podem veure que les models on el tenim com a train 10, 20 i 30 pacients són molt semblants. La gràfica del train aprés bastant ràpid i comença a e
 
 Com ha resultats de la loss pels diferents trains hem obtingut han resultats molt semblants. Com es pot veure a les imatges de la carpeta gràfiques. La principal diferencia entre les gràfiques que tenen diferent train és que la de 10 imatges és la que te pitjor resultats amb una loss de 0.00105 en el train i 0.00140 en el test, amb 200 époques. Per altre banda la de 20 imatges ha obtingut una loss de 0.00088 i 0.00105 en train i test respectivament molt semblant a la de 30 imatges que consta dels següents resultats 0.00076 i 0.00112 en train i test  respectivament. Veient la caiguda de la loss i els resultats final hem vist que la de 30 obté millor resultats ja que té la loss de test i train  més baixex, degut a que és la que més imatges d'entrenament per tant pot recrear millor el teixit, ja que tots utitlizen el mateix atuoencoder i paràmetres. Les losses de train i test obntingudes en conjunt més petites són  0.00076 i 0.00112 en train i test respectivament.
  **acabar cuando acabe de ejecutar **
