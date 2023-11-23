@@ -24,6 +24,8 @@ El GitHub l'hem distribuït de la següent manera:
   - Gràfiques: carpeta que conté les gràfiques de les losses tant de train com de test de tots 4 models
   - Pickle.py: fitxter python que conté el codi on es generen les gràfiques de loss del train i test.
   - Pickle: carpeta que conté els arxius pickle per fer les losses
+  - imatges_amb_bacteri_original: carpeta que conté imatges amb pacients positius, és a dir, amb el bacteri
+  - imatges_amb_bacteri_reconstruides: carpeta que conté imatges reconstruides de pacients positius
 
 
 
