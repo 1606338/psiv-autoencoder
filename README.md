@@ -17,15 +17,15 @@ El GitHub l'hem distribuït de la següent manera:
   - directori modelos: anem guardant els diferents models de l'autoencoder que anem creant
   - autoencoder.py: arxiu on creem l'autoencoder i fem el seu entrenament.
   - segona_part.py: arxiu on es classifica si les imatges tenen o no l'Helicobacter pylori.
-  - imatges_originals_train: carpeta que conté algunes de les imatges originals que utilitzem com a train que no tenen presència de l'Helicobacter
-  - imatges_reconstruides_train: carpeta que conté algunes de les imatges reconstruides del train pel nostre autoencoder
-  - imatges_originals_test: carpeta que conté algunes de les imatges originals que utilitzem com a test que no tenen presència de l'Helicobacter
-  - imatges_reconstruides_test: carpeta que conté algunes de les imatges reconstruïdes del train pel nostre autoencoder
+  - imatges_originals_train_X: carpeta que conté algunes de les imatges originals que utilitzem com a train que no tenen presència de l'Helicobacter (X fa referència al model)
+  - imatges_reconstruides_train_X: carpeta que conté algunes de les imatges reconstruides del train pel nostre autoencoder (X fa referència al model)
+  - imatges_originals_test_X: carpeta que conté algunes de les imatges originals que utilitzem com a test que no tenen presència de l'Helicobacter (X fa referència al model)
+  - imatges_reconstruides_test_X: carpeta que conté algunes de les imatges reconstruïdes del train pel nostre autoencoder (X fa referència al model)
   - Gràfiques: carpeta que conté les gràfiques de les losses tant de train com de test de tots 4 models
   - Pickle.py: fitxter python que conté el codi on es generen les gràfiques de loss del train i test.
   - Pickle: carpeta que conté els arxius pickle per fer les losses
-  - imatges_amb_bacteri_original: carpeta que conté imatges amb pacients positius, és a dir, amb el bacteri
-  - imatges_amb_bacteri_reconstruides: carpeta que conté imatges reconstruides de pacients positius
+  - imagenes_originales_segona_part_X: carpeta que conté imatges amb pacients positius, és a dir, amb el bacteri (X fa referència al model)
+  - imagenes_reconstruidas_segona_part_X: carpeta que conté imatges reconstruides de pacients positius (X fa referència al model)
 
 
 
