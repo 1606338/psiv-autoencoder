@@ -105,11 +105,13 @@ Després d'haver entrenat un autoencoder amb només pacients sans, utilitzarem a
 Annotated patches conte 1330 imatges amb tres classes, negatiu, dubtós i positiu. La classe del mig no ens interessa per tant la ignorarem i ens quedarem amb 1255 imatges. Una dada important és que ara ja no parlarem de pacients i carpetes sinó d'imatges, no separarem per pacients en cap moment.
 Aquest dataset es troba des-balançejat, tenint només 164 positius d'aquest 1255. Per tant haurem d'utlitzar tècniques que siguin resistents a això. En aquest dataset trobem un arxiu csv que ens indica el target (si és positiu o negatiu) de cada una de les imatges.
 
+
 Llegirem totes les imatges i les passarem pel model, i això ens donarà una imatge reconstruïda. En les imatges sanes la reconstrucció hauria de ser semblant, ja que el model ha vist imatges similars anteriorment. Però en veure les imatges positives el model no hauria de ser capaç de reconstruir les bacteries.
 Aquí radica la part important, hi haurà més diferència en les imatges positives que en les negatives. Aquesta diferència ens hauria de permetre classificar-les.
 
 
 Per fer la diferència simplement restarem l'entrada i la sortida. Només restarem el canal blau ja que aquets és el que major diferència presta entre la sortida i la entrada en les imatges positives. Això es perquè tractem amb rgb. Els punts 'vermells' de les bacteries tenen un valor de vermell baix i per tant tot i que aquest valor desaparegui en cuan a nombres no es nota. En canvi, en el canal blau sí que hi ha diferència. En aquests punts l'autoencoder s'inventa punts blaus que al ser més clars sí que té un valor elevat. Bàsicament en el canal vermell passem de valor baix a valor molt baix mentre que en el blau passem de valor molt baix a valor alt.
+
 
 En la carpeta grafiques podem trobar un seguit de histogrames on veiem les losses per cada un dels canals i separarat per clase. Aqui veiem com els histogrames de el canal general, es a dir tot, i del canal vermell son molt semblants. Hi ha bastant solapament (es poden comparar facilment ja que tenen el mateix eix x). En cambi en el canal blau no trobem tant solapament. En el cas del model 50 trobem que mes de la meitat de les dades es troben perfectament separables. Parlarem mes de això en el partat de resultats.
 
@@ -117,8 +119,10 @@ En la carpeta grafiques podem trobar un seguit de histogrames on veiem les losse
 Una vegada tenim el llistat de diferències toca trobar quin és el millor treshold que separa les dues classes. Per fer-ho hem utilitzat la corba roc.
 Aquest mètode és resistent al des-balanceig, pràcticament està fet per evitar això, i per tant el nostre salvador en aquest cas. Dividirem la sortida en train i test. Tot i que no entrenarem res, trobarem els valors de treshold en base a un i els provarem en base a l'altre.
 Podem veure les corbes roc a la carpeta de "Gràfiques".
+
 D'aquí podem trobar alguns punts òptims de tall, basats en la proximitat a la cantonada esquerra, el f-score o altres mètriques que ens interessi.
 En el nostre cas i hem escollit el més pròxim a la cantonada esquerra superior. No hem agafat altres funcions ja que hem trobat que aquestes agafaven punts més a l'esquerra (en la gràfica) del que volíem. Al ser un cas mèdic volem que no sens escapin possibles pacients amb malalties per tant buscarem un valor de true positive rate elevat tot i que impliqui augmentar false positive rate.
+
 
 Per tant: Passarem tot el conjunt de dades per els autonecoders, dividirem les loses resultants en train i test, farem una roc curve amb el train, calcularem el treshold més proper a la cantonada esquerra superior i aplicarem aquest treshold al conjunt test. Comparant aquest últim resultat amb el target real obtindrem les mètriques.
 
