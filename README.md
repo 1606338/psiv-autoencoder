@@ -176,7 +176,7 @@ Deixant això de banda si ens centrem en els resultats finals:
 
 
 Veiem que els models són bastant semblants. La propia desviació estàndard de model mitja ja ens ho indica.
-També veiem un patró, a mesura que més dades afegim, més baixa el f-score i l'accuracy. A canvi els valors de True positive rate i False positive rate. Ja que es tracta d'un cas mèdic, nostres preferim aquest segon cas per tant diem que el model 50 és el millor.
+També veiem un patró, a mesura que més dades afegim, més baixa el f-score i l'accuracy. A canvi els valors de True positive rate i False positive rate. Ja que es tracta d'un cas mèdic, nostres preferim aquest segon cas per tant diem que el model 30 és el millor.
 
 
 
